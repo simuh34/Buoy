@@ -1,0 +1,294 @@
+---
+title: "Buoy"
+author: "Simu Huang"
+date: "2020/9/25"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Import data
+ 
+  The first step is to download the data from 2000 to 2019 on the NDBC. in these data, the variable types are not exactly the same from year to year, we need to delete some columns, such as the variable tide and the duplicate variable mm. Then, we connect the year's data together to get a data frame that contains all the data.
+
+```{r cars}
+library(data.table)
+library(tidyverse)
+library(lubridate)
+library(citation)
+setwd("D:\\Documents\\R Project\\615\\buoy project\\data")
+
+#2000
+Buoy2000<-read.csv("buoy2000.txt",sep="",header = T)
+Buoy2000$TIDE<-0
+Buoy2000$mm<-0
+colnames(Buoy2000)[1]<-"X.YY"
+colnames(Buoy2000)[5]<-"WDIR"
+colnames(Buoy2000)[12]<-"PRES"
+
+#2001
+Buoy2001<-read.csv("buoy2001.txt",sep="",header = T)
+Buoy2001$mm<-0
+colnames(Buoy2001)[1]<-"X.YY"
+colnames(Buoy2001)[5]<-"WDIR"
+colnames(Buoy2001)[12]<-"PRES"
+
+
+#2002
+Buoy2002<-read.csv("buoy2002.txt",sep="",header = T)
+Buoy2002$mm<-0
+colnames(Buoy2002)[1]<-"X.YY"
+colnames(Buoy2002)[5]<-"WDIR"
+colnames(Buoy2002)[12]<-"PRES"
+
+#2003
+Buoy2003<-read.csv("buoy2003.txt",sep="",header = T)
+Buoy2003$mm<-0
+colnames(Buoy2003)[1]<-"X.YY"
+colnames(Buoy2003)[5]<-"WDIR"
+colnames(Buoy2003)[12]<-"PRES"
+
+#2004
+Buoy2004<-read.csv("buoy2004.txt",sep="",header = T)
+Buoy2004$mm<-0
+colnames(Buoy2004)[1]<-"X.YY"
+colnames(Buoy2004)[5]<-"WDIR"
+colnames(Buoy2004)[12]<-"PRES"
+
+#2005
+Buoy2005<-read.csv("buoy2005.txt",sep="",header = T)
+mm2005<-Buoy2005$mm
+Buoy2005$mm<-NULL
+Buoy2005$mm<-mm2005
+colnames(Buoy2005)[1]<-"X.YY"
+colnames(Buoy2005)[5]<-"WDIR"
+colnames(Buoy2005)[12]<-"PRES"
+
+#2006
+Buoy2006<-read.csv("buoy2006.txt",sep="",header = T)
+mm2006<-Buoy2006$mm
+Buoy2006$mm<-NULL
+Buoy2006$mm<-mm2006
+colnames(Buoy2006)[1]<-"X.YY"
+colnames(Buoy2006)[5]<-"WDIR"
+colnames(Buoy2006)[12]<-"PRES"
+
+#2007
+Buoy2007<-read.csv("buoy2007.txt",sep="",header = T)
+mm2007<-Buoy2007$mm
+Buoy2007$mm<-NULL
+Buoy2007$mm<-mm2007
+Buoy2007 = Buoy2007[-c(1),]
+
+#2008
+Buoy2008<-read.csv("buoy2008.txt",sep="",header = T)
+mm2008<-Buoy2008$mm
+Buoy2008$mm<-NULL
+Buoy2008$mm<-mm2008
+Buoy2008 = Buoy2008[-c(1),]
+
+
+#2009
+Buoy2009<-read.csv("buoy2009.txt",sep="",header = T)
+mm2009<-Buoy2009$mm
+Buoy2009$mm<-NULL
+Buoy2009$mm<-mm2009
+Buoy2009 = Buoy2009[-c(1),]
+
+#2010
+Buoy2010<-read.csv("buoy2010.txt",sep="",header = T)
+mm2010<-Buoy2010$mm
+Buoy2010$mm<-NULL
+Buoy2010$mm<-mm2010
+Buoy2010 = Buoy2010[-c(1),]
+
+#2011
+Buoy2011<-read.csv("buoy2011.txt",sep="",header = T)
+mm2011<-Buoy2011$mm
+Buoy2011$mm<-NULL
+Buoy2011$mm<-mm2011
+Buoy2011 = Buoy2011[-c(1),]
+
+#2012
+Buoy2012<-read.csv("buoy2012.txt",sep="",header = T)
+mm2012<-Buoy2012$mm
+Buoy2012$mm<-NULL
+Buoy2012$mm<-mm2012
+Buoy2012 = Buoy2012[-c(1),]
+
+#2013
+Buoy2013<-read.csv("buoy2013.txt",sep="",header = T)
+mm2013<-Buoy2013$mm
+Buoy2013$mm<-NULL
+Buoy2013$mm<-mm2013
+Buoy2013 = Buoy2013[-c(1),]
+
+#2014
+Buoy2014<-read.csv("buoy2014.txt",sep="",header = T)
+mm2014<-Buoy2014$mm
+Buoy2014$mm<-NULL
+Buoy2014$mm<-mm2014
+Buoy2014 = Buoy2014[-c(1),]
+
+#2015
+Buoy2015<-read.csv("buoy2015.txt",sep="",header = T)
+mm2015<-Buoy2015$mm
+Buoy2015$mm<-NULL
+Buoy2015$mm<-mm2015
+Buoy2015 = Buoy2015[-c(1),]
+
+#2016
+Buoy2016<-read.csv("buoy2016.txt",sep="",header = T)
+mm2016<-Buoy2016$mm
+Buoy2016$mm<-NULL
+Buoy2016$mm<-mm2016
+Buoy2016 = Buoy2016[-c(1),]
+
+#2017
+Buoy2017<-read.csv("buoy2017.txt",sep="",header = T)
+mm2017<-Buoy2017$mm
+Buoy2017$mm<-NULL
+Buoy2017$mm<-mm2017
+Buoy2017 = Buoy2017[-c(1),]
+
+#2018
+Buoy2018<-read.csv("buoy2018.txt",sep="",header = T)
+mm2018<-Buoy2018$mm
+Buoy2018$mm<-NULL
+Buoy2018$mm<-mm2018
+Buoy2018 = Buoy2018[-c(1),]
+
+#2019
+Buoy2019<-read.csv("buoy2019.txt",sep="",header = T)
+mm2019<-Buoy2019$mm
+Buoy2019$mm<-NULL
+Buoy2019$mm<-mm2019
+Buoy2019 = Buoy2019[-c(1),]
+
+#Combine
+
+Buoy<-rbind(Buoy2000,Buoy2001,Buoy2002,Buoy2003,Buoy2004,Buoy2005,Buoy2006,Buoy2007,Buoy2008,Buoy2009,Buoy2010,Buoy2011,Buoy2012,Buoy2013,Buoy2014,Buoy2015,Buoy2016,Buoy2017,Buoy2018,Buoy2019)
+
+```
+
+## 
+There are some outliers, like temperatures above 50 degrees and some observations of 999. These are obviously not practical. Therefore, we only choose the observations meeting our requirements to create a new date set. 
+
+
+```{r}
+
+Buoy[Buoy==99|Buoy==999|Buoy==9999]<-0
+
+Buoy <- Buoy [, -11]
+Buoy <- Buoy [, -15:-17]
+
+#remove outliers
+a <- Buoy %>% select(X.YY, MM, DD, hh)
+
+a2 <- as.data.frame(lapply(a,as.numeric))
+D_date<- make_datetime(year=a2$X.YY, month=a2$MM, day=a2$DD, hour=a2$hh)
+Buoy$D_date <- D_date
+cols <- colnames(Buoy)
+new_cols <- c(cols[1], cols[length(cols)], cols[2:(length(cols) - 1)])
+Buoy <- Buoy[, new_cols]
+Buoy <- Buoy[,c(-1,-3:-5)]
+Buoy <- filter(Buoy, DEWP < 999 & ATMP < 50 & WTMP < 50)
+Buoy$D_date <- as.POSIXct(Buoy$D_date)
+Buoy[,2:11]<-lapply(Buoy[,2:11],as.numeric)
+
+save(Buoy, file = "Buoy.Rdata")
+```
+
+
+##
+We think it is possible to compare the change in temperature according to the average monthly and yearly temperature. In this step, we reorder the data by date, month and year and calculate the mean value of these data, because in this way, We can use the average daily temperature to conclude the temperature trend, and the average monthly temperature and the average annual temperature can eliminate the influence of seasons and extreme weather on the results.
+
+
+```{r}
+Buoy <- filter(Buoy, DEWP < 999 & ATMP < 50 & WTMP < 50)
+Buoy$D_date <- as.POSIXct(Buoy$D_date)
+Buoy[,2:11]<-lapply(Buoy[,2:11],as.numeric)
+
+Buoy2 <- Buoy %>% group_by(date(D_date)) %>% summarize(mean(WDIR),mean(WSPD),mean(GST),mean(WVHT),mean(DPD),mean(APD),mean(PRES),mean(ATMP),mean(WTMP),mean(DEWP))
+
+Buoy3 <- Buoy %>% group_by(year(D_date),month(D_date)) %>% summarize(mean(WDIR),mean(WSPD),mean(GST),mean(WVHT),mean(DPD),mean(APD),mean(PRES),mean(ATMP),mean(WTMP),mean(DEWP))
+
+Buoy4 <- Buoy %>% group_by(year(D_date)) %>% summarize(mean(WDIR),mean(WSPD),mean(GST),mean(WVHT),mean(DPD),mean(APD),mean(PRES),mean(ATMP),mean(WTMP),mean(DEWP))
+
+b <- Buoy3 %>% select(`year(D_date)`,`month(D_date)`)
+b2 <- as.data.frame(lapply(b,as.numeric))
+year_month <- make_date(year = b$`year(D_date)`,month = b$`month(D_date)`)
+Buoy3$year_month<-year_month
+
+```
+
+
+##
+#ATMP
+As the simple regression model, we can find that for each year of time increase, the predicted annual increase in air temperature is 0.099, which means that the global warming is indeed happening. And we find that the relationship between averaged wind speed over the an eight-minute period and the dominant wave period is not obvious so we delete these two variable. The two factors that best reflect change are the gust speed(GST) and the wind speed (WSPD).
+
+#WTMP
+In this model, we can find that for each year of time increase, the predicted annual increase in sea surface temperature is 0.1155, which also indicates that the global warming is indeed happening. And we find that the relationship between averaged wind speed over the an eight minute period, wind direction, and the dominant wave period is not obvious so we delete these three variable. The two factors that best reflect change is the wind speed (WSPD).
+
+
+```{r}
+
+
+#ATMP
+fit_in <- lm (Buoy4$`mean(ATMP)` ~ Buoy4$`year(D_date)`)
+fit_year <- lm ( Buoy4$`mean(ATMP)` ~ Buoy4$`mean(WDIR)`+ Buoy4$`mean(WSPD)`+Buoy4$`mean(GST)`+ Buoy4$`mean(WVHT)`+ Buoy4$`mean(APD)` , data = Buoy4 )
+fit_month <- lm ( Buoy3$`mean(ATMP)` ~ Buoy3$`mean(WDIR)`+ Buoy3$`mean(WSPD)`+Buoy3$`mean(GST)`+ Buoy3$`mean(WVHT)`+ Buoy3$`mean(APD)` , data = Buoy3 )
+fit_day <- lm ( Buoy2$`mean(ATMP)` ~ Buoy2$`mean(WDIR)`+ Buoy2$`mean(WSPD)`+Buoy2$`mean(GST)`+ Buoy2$`mean(WVHT)`+ Buoy2$`mean(APD)` , data = Buoy2 )
+
+print(fit_in)
+print(fit_year)
+print(fit_month)
+print(fit_day)
+plot(fit_in)
+plot(fit_year)
+plot(fit_month)
+plot(fit_day)
+summary(fit_in)
+summary(fit_year)
+summary(fit_month)
+summary(fit_day)
+
+
+ggplot(mapping = aes(x= `year(D_date)`, y= `mean(ATMP)`),data = Buoy4)+ geom_point() + geom_smooth(method = "lm", color="black", formula = y ~ x)
+
+ggplot(mapping = aes(x= year_month, y= `mean(ATMP)`),data = Buoy3)+ geom_point() + geom_smooth(method = "lm", color="black", formula = y ~ x)
+
+ggplot(mapping = aes(x= `date(D_date)`, y= `mean(ATMP)`),data = Buoy2)+ geom_point() + geom_smooth(method = "lm", color="black", formula = y ~ x)
+
+
+#WTMP
+fit_in_1 <- lm (Buoy4$`mean(WTMP)` ~ Buoy4$`year(D_date)`)
+fit_year_1 <- lm ( Buoy4$`mean(WTMP)` ~  Buoy4$`mean(WSPD)`+Buoy4$`mean(GST)`+ Buoy4$`mean(WVHT)`+ Buoy4$`mean(APD)` , data = Buoy4 )
+fit_month_1 <- lm ( Buoy3$`mean(WTMP)` ~  Buoy3$`mean(WSPD)`+Buoy3$`mean(GST)`+ Buoy3$`mean(WVHT)`+ Buoy3$`mean(APD)` , data = Buoy3 )
+fit_day_1 <- lm ( Buoy2$`mean(WTMP)` ~  Buoy2$`mean(WSPD)`+Buoy2$`mean(GST)`+ Buoy2$`mean(WVHT)`+ Buoy2$`mean(APD)` , data = Buoy2 )
+
+print(fit_in_1)
+print(fit_year_1)
+print(fit_month_1)
+print(fit_day_1)
+plot(fit_year_1)
+plot(fit_month_1)
+plot(fit_day_1)
+summary(fit_in_1)
+summary(fit_year_1)
+summary(fit_month_1)
+summary(fit_day_1)
+
+
+ggplot(mapping = aes(x= `year(D_date)`, y= `mean(WTMP)`),data = Buoy4)+ geom_point() + geom_smooth(method = "lm", color="blue", formula = y ~ x)
+
+ggplot(mapping = aes(x= year_month, y= `mean(WTMP)`),data = Buoy3)+ geom_point() + geom_smooth(method = "lm", color="blue", formula = y ~ x)
+
+ggplot(mapping = aes(x= `date(D_date)`, y= `mean(WTMP)`),data = Buoy2)+ geom_point() + geom_smooth(method = "lm", color="blue", formula = y ~ x)
+
+package2zenodo("citation")
+```
+
+
